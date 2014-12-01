@@ -17,7 +17,7 @@ function torus( x,y,z,R,r)
 	return Math.sqrt(qx*qx+qy*qy)-r;
 }
 
-function cylinder( x,y,z,r,h)
+function zcylinder( x,y,z,r,h)
 {
   //h is half the height and r is the radius
   //vec2 d = abs(vec2(length(p.xz),p.y)) - vec2(r,h);
@@ -28,11 +28,16 @@ function cylinder( x,y,z,r,h)
   return Math.min(Math.max(dx,dy),0) + Math.sqrt(Math.pow(Math.max(dx,0),2)+ Math.pow(Math.max(dy,0),2))
 }
 
+function xcylinder(x,y,z,r,l)
+{
+	return zcylinder(x,z,y,r,l)
+}
+
 
 function endcap( x,y,z,w,h)
 {
 	var d_tor = torus(x,y,z,(w-h)*0.5,0.5*h);
-	var d_cyl = cylinder(x,y,z,(w-h)*0.5,0.5*h);
+	var d_cyl = zcylinder(x,y,z,(w-h)*0.5,0.5*h);
 
 	return Math.min(d_tor,d_cyl);
 	//return d_tor
@@ -40,9 +45,8 @@ function endcap( x,y,z,w,h)
 
 function implicitwrapper(x,y,z)
 {
-	//return cylinder(x,y,z,5,1);
-	//return sphere(x,y,z)
-	return endcap(x,y,z,3,1);
+	//return endcap(x,y,z,3,1);
+	return Math.min(zcylinder(x,y,z,1,5),xcylinder(x,y,z,3,3))
 }
 
 

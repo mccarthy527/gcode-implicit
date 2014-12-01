@@ -1,0 +1,23 @@
+{
+  "name": "gcode-implicit",
+  "version": "0.0.0",
+  "description": "create a distance field representation of printed roads",
+  "main": "main.js",
+  "dependencies": {
+    "mesh-viewer": "~0.0.0",
+    "isosurface": "~1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mccarthy527/gcode-implicit.git"
+  },
+  "author": "Brian McCarthy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mccarthy527/gcode-implicit/issues"
+  },
+  "homepage": "https://github.com/mccarthy527/gcode-implicit"
+}
