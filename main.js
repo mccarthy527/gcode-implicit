@@ -10,23 +10,25 @@ function torus( x,y,z,R,r)
 	//R, dist from the center of the tube to the center of the torus
 	
 	//vec2 q = vec2(length(p.xz)-R,p.y);
-	qx = Math.sqrt(x*x+z*z)-R;
-	qy = y;
+	qx = Math.sqrt(x*x+y*y)-R;
+	qz = z;
 	
 	//return length(q)-r; 
-	return Math.sqrt(qx*qx+qy*qy)-r;
+	return Math.sqrt(qx*qx+qz*qz)-r;
 }
 
 function cylinder( x,y,z,r,h)
 {
   //h is half the height and r is the radius
   //vec2 d = abs(vec2(length(p.xz),p.y)) - vec2(r,h);
-  dx = Math.abs(Math.sqrt(x*x + z*z)) - r;
-  dy = Math.abs(y) - h;
+  dx = Math.abs(Math.sqrt(x*x + y*y)) - r;
+  dz = Math.abs(z) - h;
   
   //return min(max(d.x,d.y),0.0) + length(max(d,0.0));
-  return Math.min(Math.max(dx,dy),0) + Math.sqrt(Math.pow(Math.max(dx,0),2)+ Math.pow(Math.max(dy,0),2))
+  return Math.min(Math.max(dx,dz),0) + Math.sqrt(Math.pow(Math.max(dx,0),2)+ Math.pow(Math.max(dz,0),2))
 }
+
+
 
 
 function endcap( x,y,z,w,h)
@@ -42,7 +44,7 @@ function implicitwrapper(x,y,z)
 {
 	//return cylinder(x,y,z,5,1);
 	//return sphere(x,y,z)
-	return endcap(x,y,z,3,1);
+	return endcap(x,y,z,5,1);
 }
 
 
