@@ -56,10 +56,13 @@ function rectangle(x,y,z,bx,by,bz)
 	return Math.min(Math.max(dx,Math.max(dy,dz)),0.0) + veclength(Math.max(dx,0.0),Math.max(dy,0.0),Math.max(dz,0.0));
 }
 
+//road is centered at origin
 //l is in x, w is in y, h is in z
-function roadmiddle(x,y,z,l,w,h)
+function road(x,y,z,l,w,h)
 {
 	//union a rectangle and two translated cylinders actually, could maybe just take absolute value of y and use only one translated cylinder - should be a bit more efficient
+	
+	//can also exploit another symmetry by taking absolute value of x and using just one endcap
 }
 
 function implicitwrapper(x,y,z)
