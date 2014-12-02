@@ -4,19 +4,12 @@ var isosurface = require("isosurface")
 
 function sphere(x,y,z) 
 {
-  return x*x + y*y + z*z - 9
+  return x*x + y*y + z*z - 4
 }
 
 function veclength(x,y,z)
 {
 	return Math.sqrt(x*x + y*y + z*z);
-}
-
-function veccross(ax,ay,az, bx,by,bz) 
-{
-  return [ay*bz - az*by,
-          az*bx - ax*bz,
-          ax*by - ay*bx];
 }
 
 function torus( x,y,z,R,r)
@@ -104,8 +97,9 @@ function road(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
 	//a local coordinate system centered between the start and end points.
 	var ux = (ex-sx);				//u is a unit vector pointing from the start point to the end point
 	var uy = (ey-sy);
-	ux = ux/Math.sqrt(ux*ux+uy*uy);
-	uy = uy/Math.sqrt(ux*ux+uy*uy);
+	var lenu = Math.sqrt(ux*ux+uy*uy)
+	ux = ux/lenu;
+	uy = uy/lenu;
 	
 	var mx = (ex+sx)/2;				//m is a vector point from the origin to the local coordinate system
 	var my = (ey+sy)/2;
@@ -121,13 +115,13 @@ function road(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
 function implicitwrapper(x,y,z)
 {
 	//return roadend(x,y,z,3,1);
-	var sx= 0
-	var sy= 0
+	var sx= -5
+	var sy= -5
 	var sz= 2
-	var ex= 2
-	var ey= 7 
+	var ex= 5
+	var ey= 5 
 	var ez= 2
-	return Math.min(originroad(x,y,z,10,8,2),road(x,y,z,sx,sy,sz,ex,ey,ez,8,2), sphere(x-ex,y-ey,z-ez));
+	return Math.min(originroad(x,y,z,10,8,2),road(x,y,z,sx,sy,sz,ex,ey,ez,4,1), sphere(x-ex,y-ey,z-ez), sphere(x-sx,y-sy,z-sz));
 	//return Math.min(zcylinder(x,y,z,1,5),xcylinder(x,y,z,3,3))
 }
 
