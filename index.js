@@ -1,6 +1,6 @@
 "use strict"
 
-var isosurface = require("isosurface")
+module.exports = road
 
 function sphere(x,y,z) 
 {
@@ -111,33 +111,3 @@ function road(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
 	
 	return originroad(xloc,yloc,zloc,l,w,h);
 }
-
-function implicitwrapper(x,y,z)
-{
-	//return roadend(x,y,z,3,1);
-	var sx= -5
-	var sy= -5
-	var sz= 2
-	var ex= 5
-	var ey= 5 
-	var ez= 2
-	return Math.min(originroad(x,y,z,10,8,2),road(x,y,z,sx,sy,sz,ex,ey,ez,4,1), sphere(x-ex,y-ey,z-ez), sphere(x-sx,y-sy,z-sz));
-	//return Math.min(zcylinder(x,y,z,1,5),xcylinder(x,y,z,3,3))
-}
-
-
-var mymesh = isosurface.surfaceNets([128,128,128], implicitwrapper, [[-11,-11,-11], [11,11,11]])
-
-
-
-
-var shell = require("mesh-viewer")()
-var mesh
-
-shell.on("viewer-init", function() {
-  mesh = shell.createMesh(mymesh)
-})
-
-shell.on("gl-render", function() {
-  mesh.draw()
-})
