@@ -1,6 +1,6 @@
 "use strict"
 
-module.exports = road;
+module.exports = roadnoz;
 
 function sphere(x,y,z) 
 {
@@ -82,6 +82,7 @@ function originroad(x,y,z,l,w,h)
 }
 
 //create a road from start point (sx,sy,sz) to end point (ex,ey,ez) with width w and height h.
+//half of the road will be above the sp,ep and half will be below.
 function road(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
 {
 	//error checking
@@ -105,9 +106,15 @@ function road(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
 	var my = (ey+sy)/2;
 	var mz = (ez+sz)/2;
 	
-	var xloc = (x-mx)* ux  + (y-my)*uy;	//finally have the original querry in the local coordinate system
+	var xloc = (x-mx)* ux  + (y-my)*uy;	//finally have the original query in the local coordinate system
 	var yloc = (x-mx)*(-uy)+ (y-my)*ux;
 	var zloc = z - mz;
 	
 	return originroad(xloc,yloc,zloc,l,w,h);
+}
+
+//same as road function except all of the road will lie below sz,ez as this is how it will actually be printed by the nozzle
+function roadnoz(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
+{
+	return road(x,y,z,sx,sy,sz-h/2,ex,ey,ez-h/2,w,h);
 }
