@@ -118,3 +118,17 @@ function roadnoz(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
 {
 	return road(x,y,z,sx,sy,sz-h/2,ex,ey,ez-h/2,w,h);
 }
+
+//same as roadnoz, but takes Ve, the amount of filament extruded (in mm^3) rather than the road width as an imput.
+//conservation of volume is assumed and extruded shape is a rectangle with circular ends
+//end effects are not considered.
+function roadfil(x,y,z,sx,sy,sz,ex,ey,ez,Ve,h)
+{
+	//TODO: need to add some error checking here!!
+	var l = veclength(ex-sx,ey-sy,ez-sz);
+	var w = Ve/(l*h)+(1-3.14159265359/4)*h;
+	return roadnoz(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
+	
+}
+
+console.log(roadfil(1,2,3,4,5,3,7,8,3,10,1));
