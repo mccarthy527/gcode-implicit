@@ -130,5 +130,3 @@ function roadfil(x,y,z,sx,sy,sz,ex,ey,ez,Ve,h)
 	return roadnoz(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
 	
 }
-
-console.log(roadfil(1,2,3,4,5,3,7,8,3,10,1));
