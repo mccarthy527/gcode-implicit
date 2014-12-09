@@ -1,6 +1,6 @@
 "use strict"
 
-module.exports = roadnoz;
+module.exports = roadfil;
 
 function sphere(x,y,z) 
 {
@@ -79,6 +79,7 @@ function originroad(x,y,z,l,w,h)
 	var de = roadend(x-l/2.0,y,z,w,h);
 	var dc = xcylinder(x,y-(w-h)/2.0,z,h/2.0,l/2.0);
 	return Math.min(dr,de, dc);
+	
 }
 
 //create a road from start point (sx,sy,sz) to end point (ex,ey,ez) with width w and height h.
@@ -126,7 +127,15 @@ function roadfil(x,y,z,sx,sy,sz,ex,ey,ez,Ve,h)
 {
 	//TODO: need to add some error checking here!!
 	var l = veclength(ex-sx,ey-sy,ez-sz);
-	var w = Ve/(l*h)+(1-3.14159265359/4)*h;
-	return roadnoz(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
+	var w = Ve/(l*h)+(1-3.14159265359/4)*h;		//NEED TO CHECK FOR 0 LENGTH
+	
+	var approxdist = roadnoz(x,y,z,sx,sy,sz,ex,ey,ez,w,h)
+	
+	if(isNaN(approxdist))
+	{
+		throw 'approxdist is NaN!';
+	}
+	
+	return approxdist
 	
 }
